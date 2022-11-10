@@ -1,6 +1,6 @@
-import React from 'react';
-import { Skeleton } from './Skeleton';
-import { User } from './User';
+import React from 'react'
+import { Skeleton } from './Skeleton'
+import { User } from './User'
 
 export const Users = ({ items, isLoading }) => {
   return (
@@ -24,5 +24,5 @@ export const Users = ({ items, isLoading }) => {
       )}
       <button className="send-invite-btn">Отправить приглашение</button>
     </>
-  );
-};
+  )
+}
