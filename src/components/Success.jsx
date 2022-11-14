@@ -1,12 +1,23 @@
-import React from 'react';
+import React from 'react'
 
 export const Success = ({ count }) => {
   return (
-    <div class="success-block">
+    <div className="success-block">
       <img src="/assets/success.svg" alt="Success" />
       <h3>Успешно!</h3>
-      <p>Всем {count} пользователям отправлено приглашение.</p>
-      <button className="send-invite-btn">Назад</button>
+      <p>
+        {`${
+          count > 1 ? `Всем ${count} пользователям` : `Пользователю`
+        }  отправлено приглашение.`}
+      </p>
+      {/* Плохая практика поскольку страница обновляется */}
+      <button
+        onClick={() => window.location.reload()}
+        href="/"
+        className="send-invite-btn"
+      >
+        Назад
+      </button>
     </div>
-  );
-};
+  )
+}

@@ -7,7 +7,14 @@ import { Users } from './components/Users'
 
 function App() {
   const [users, setUsers] = useState([])
+  const [invites, setInvites] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const [success, setSuccess] = useState(false)
+  const [data, setData] = useState('')
+
+  function handleInputChange(event) {
+    setData(event.target.value)
+  }
 
   useEffect(() => {
     fetch('https://reqres.in/api/users')
@@ -20,10 +27,33 @@ function App() {
       .finally(() => setIsLoading(false))
   }, [])
 
+  const handleInviteChange = (id) => {
+    if (invites.includes(id)) {
+      setInvites((prev) => prev.filter((_id) => _id !== id))
+    } else {
+      setInvites((prev) => [...prev, id])
+    }
+  }
+
+  const handleSendInvites = () => {
+    setSuccess(true)
+  }
+
   return (
     <div className="App">
-      <Users items={users} />
-      {/* <Success /> */}
+      {success ? (
+        <Success count={invites.length} />
+      ) : (
+        <Users
+          handleInput={handleInputChange}
+          searchValue={data}
+          items={users}
+          isLoading={isLoading}
+          invites={invites}
+          handleInviteChange={handleInviteChange}
+          handleSendInvites={handleSendInvites}
+        />
+      )}
     </div>
   )
 }
